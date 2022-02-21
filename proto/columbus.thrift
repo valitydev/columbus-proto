@@ -37,7 +37,7 @@ exception InvalidRequest {
 /**
 * Интерфейс Geo Service для клиентов - "Columbus"
 */
-service GeoIpService {
+service ColumbusService {
     /**
     * Возвращает информацию о предполагаемом местоположении по IP
     * если IP некоректный то кидается InvalidRequest с этим IP
