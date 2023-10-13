@@ -7,7 +7,7 @@
     <parent>
         <groupId>dev.vality</groupId>
         <artifactId>library-parent-pom</artifactId>
-        <version>1.0.2</version>
+        <version>2.0.0</version>
     </parent>
 
     <artifactId>columbus-proto</artifactId>
@@ -17,28 +17,6 @@
     <name>columbus-proto</name>
     <description>Generates jar artifact containing compiled thrift classes based on generated thrift IDL files
     </description>
-    <url>https://github.com/valitydev/columbus-proto</url>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <email>devs@vality.dev</email>
-            <organization>Vality</organization>
-            <organizationUrl>https://vality.dev</organizationUrl>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:git://github.com/valitydev/columbus-proto</connection>
-        <developerConnection>scm:git:ssh://github.com/valitydev/columbus-proto</developerConnection>
-        <url>https://github.com/valitydev/columbus-proto/tree/master</url>
-    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,7 +27,7 @@
         <dependency>
             <groupId>dev.vality.woody</groupId>
             <artifactId>woody-thrift</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.5</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -61,16 +39,6 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
-        <resources>
-            <resource>
-                <directory>${project.basedir}/proto</directory>
-                <targetPath>${project.build.outputDirectory}/proto</targetPath>
-                <includes>
-                    <include>*.thrift</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
         <plugins>
             <!-- THRIFT -->
             <plugin>
@@ -80,7 +48,7 @@
                 <configuration>
                     <generator>java:fullcamel</generator>
                     <thriftSourceRoot>${project.basedir}/proto</thriftSourceRoot>
-                    <thriftExecutable>${path_to_thrift}</thriftExecutable>
+                    <thriftExecutable></thriftExecutable>
                 </configuration>
                 <executions>
                     <execution>
@@ -95,7 +63,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -105,8 +73,8 @@
                         <configuration>
                             <relocations>
                                 <relocation>
-                                    <pattern>dev.vality.damsel</pattern>
-                                    <shadedPattern>dev.vality.damsel.v${commit.number}</shadedPattern>
+                                    <pattern>dev.vality</pattern>
+                                    <shadedPattern>dev.vality.v${commit.number}</shadedPattern>
                                 </relocation>
                             </relocations>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
